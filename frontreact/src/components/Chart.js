@@ -3,7 +3,6 @@ import * as d3 from "d3";
 
 export const Chart = ({ width = 600, height = 600, data }) => {
   const barChart = useRef();
-  console.log(data);
 
   useEffect(() => {
     const margin = { top: 10, left: 50, bottom: 40, right: 10 };
@@ -44,7 +43,32 @@ export const Chart = ({ width = 600, height = 600, data }) => {
       .attr("transform", `translate(0, ${iheight})`);
 
     g.append("g").classed("y--axis", true).call(d3.axisLeft(y));
-    // Continue with implementation. Don't forget the tooltip
+
+    const tooldiv = d3
+      .select(barChart.current)
+      .append("div")
+      .style("visibility", "hidden")
+      .style("position", "absolute")
+      .style("background-color", "white");
+
+    svg
+      .append("g")
+      .selectAll("path")
+      .data("bars")
+      .attr("d", "bars")
+      .on("mouseover", (e, d) => {
+        tooldiv
+          .style("visibility", "visible")
+          .text(`${data.name}:`, `${data.stock}`);
+      })
+      .on("mousemove", (e, d) => {
+        tooldiv
+          .style("top", e.pageY - 50 + "px")
+          .style("left", e.pageX - 50 + "px");
+      })
+      .on("mouseout", () => {
+        tooldiv.style("visibility", "hidden");
+      });
   });
 
   return (

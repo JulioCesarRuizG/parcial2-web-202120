@@ -5,7 +5,6 @@ import { FormattedMessage } from "react-intl";
 export const Home = ({ searchKey }) => {
   const [products, setProducts] = useState([]);
 
-  var nuevo;
   useEffect(() => {
     const fetchProductos = async () => {
       const response = await fetch(
@@ -13,11 +12,10 @@ export const Home = ({ searchKey }) => {
       );
       const data = await response.json();
       setProducts(data);
-      nuevo = data[0].name;
     };
 
     fetchProductos();
-  }, [nuevo]);
+  }, [searchKey]);
 
   return (
     <section id="home">

@@ -1,16 +1,14 @@
 const data = require("../assets/data");
 
 function getProducts(query) {
-  return data;
-}
-
-const findProducts = async (nombre) => {
-  var productos = data.map(function (dat) {
-    if (dat.name.includes(nombre)) {
-      return dat;
+  var tod = [];
+  data.map(function (dat) {
+    if (dat.name.includes(query)) {
+      tod.push(dat);
+    } else {
     }
   });
-  return productos;
-};
+  return tod;
+}
 
 module.exports = { getProducts };

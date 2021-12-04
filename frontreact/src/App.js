@@ -1,5 +1,5 @@
 import "./App.scss";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import { Home } from "./pages/Home";
 import { Report } from "./pages/Report";
@@ -10,16 +10,22 @@ import messages from "./i18n/messages";
 
 function App() {
   const [searchState, setSearchState] = useState({ searchKey: "" });
-  const [language, setLanguage] = useState(LOCALES.SPANISH);
+  const [language, setLanguage] = useState(LOCALES.ENGLISH);
 
   const setSearchkey = (query) => {
     setSearchState({ searchKey: query });
   };
 
+  useEffect(() => {
+    const fecthLang = async () => {};
+
+    fecthLang();
+  }, [language]);
+
   return (
     <IntlProvider locale={language} messages={messages[language]}>
       <header>
-        <NavBar onSearchKeyChange={setSearchkey} onChangeLang={setLanguage} />
+        <NavBar onSearchKeyChange={setSearchkey} defLang={setLanguage} />
       </header>
       <main>
         <Routes>

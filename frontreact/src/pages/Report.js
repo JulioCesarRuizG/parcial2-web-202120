@@ -7,7 +7,7 @@ export const Report = () => {
   var nuevo;
   useEffect(() => {
     const fetchProductos = async () => {
-      const response = await fetch(`http://localhost:3001/api/products/`);
+      const response = await fetch(`http://localhost:3001/api/products?q=`);
       const data = await response.json();
       setProducts(data);
       nuevo = data[0].name;
